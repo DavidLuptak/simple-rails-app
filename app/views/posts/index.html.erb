@@ -15,11 +15,27 @@
 
   <tbody>
     <% @posts.each do |post| %>
-      <tr>
-        <td><%= post.author %></td>
-        <td><%= post.title %></td>
-        <td><%= post.body %></td>
-        <td><%= post.tags.map {|tag| tag.name}.join(', ') %></td>
+      <tr id=<%= "post-row-#{post.id}" %>>
+        <td>
+          <div class="post-author">
+            <%= post.author %>
+          </div>
+        </td>
+        <td>
+          <div class="post-title">
+            <%= post.title %>
+          </div>
+        </td>
+        <td>
+          <div class="post-body">
+            <%= post.body %>
+          </div>
+        </td>
+        <td>
+          <div class="post-tags">
+            <%= post.tags.map {|tag| tag.name}.join(', ') %>
+          </div>
+        </td>
         <td><%= link_to 'Show', post %></td>
         <td><%= link_to 'Edit', edit_post_path(post) %></td>
         <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
