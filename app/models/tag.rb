@@ -5,8 +5,4 @@ class Tag < ActiveRecord::Base
 
   extend FriendlyId
   friendly_id :name
-
-  # def to_param
-  #   self.name
-  # end
 end
