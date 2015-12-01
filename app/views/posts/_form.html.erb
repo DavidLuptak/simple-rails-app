@@ -24,7 +24,10 @@
     <%= f.text_area :body %>
   </div>
   <div class="field">
-    <%= collection_check_boxes(:post, :tag_ids, Tag.all, :id, :name)%>
+    <%= f.fields_for :tags do |tags_form| %>
+      <%= tags_form.label :tags_string %><br>
+      <%= tags_form.text_field :name %>
+    <% end %>
   </div>
   <div class="actions">
     <%= f.submit %>
