@@ -2,6 +2,13 @@
 
 <h1>Listing Posts</h1>
 
+<div class="row">
+  <h2>Filter by tag</h2>
+  <% @tags.each do |tag| %>
+    <a class="filter-by-tag" href="posts/filter/<%= tag.name %>"><%= tag.name %></a>
+  <% end %>
+</div>
+
 <table>
   <thead>
     <tr>
@@ -15,7 +22,7 @@
 
   <tbody>
     <% @posts.each do |post| %>
-      <tr id=<%= "post-row-#{post.id}" %>>
+      <tr id="post-row-<%= post.id %>" >
         <td>
           <div class="post-author">
             <%= post.author %>
