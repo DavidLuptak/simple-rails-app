@@ -24,10 +24,8 @@
     <%= f.text_area :body %>
   </div>
   <div class="field">
-    <%= f.fields_for :tags do |tags_form| %>
-      <%= tags_form.label :tags_string %><br>
-      <%= tags_form.text_field :name %>
-    <% end %>
+    <%= f.label :tags_string %><br>
+    <%= f.text_field :tags_string %>
   </div>
   <div class="actions">
     <%= f.submit %>

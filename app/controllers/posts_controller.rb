@@ -14,12 +14,10 @@ class PostsController < ApplicationController
   def new
     @post = Post.new
     @post.tags.build
-    # @tags = Tag.all
   end
 
   # GET /posts/1/edit
   def edit
-    @tags = Tag.all
   end
 
   # POST /posts
@@ -66,10 +64,11 @@ class PostsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_post
       @post = Post.find(params[:id])
+      @post.tags_string = @post.tags.map { |tag| tag.name}.join(', ')
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:author, :title, :body, tags_attributes: [:name])
+      params.require(:post).permit(:author, :title, :body, :tags_string)
     end
 end

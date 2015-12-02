@@ -5,9 +5,19 @@ class Post < ActiveRecord::Base
 
   has_and_belongs_to_many :tags, dependent: :destroy
 
-  accepts_nested_attributes_for :tags
+  # accepts_nested_attributes_for :tags
 
-  def tags_string
+  attr_accessor :tags_string
+  validates :tags_string, presence: { message: "must have at least one tag" }
 
+  before_save :handle_tags
+
+  def handle_tags
+    self.tags = []
+    tags_from_input = tags_string.split(/[,\s]+/).uniq
+    tags_from_input.each do |tag|
+      self.tags << Tag.find_or_create_by!(:name => tag)
+    end
   end
+
 end
