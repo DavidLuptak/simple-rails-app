@@ -1,12 +1,13 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Posts</h1>
+<h1>
+  <%= link_to 'Posts', root_path %>
+</h1>
 
 <div class="row">
   <h2>Filter by tag</h2>
   <% @tags.each do |tag| %>
-    <a class="filter-by-tag" href="posts/filter/<%= tag.name %>"><%= tag.name %></a>
-      <a class="tag-counter"><%= tag.posts_count %></a>
+    <%= link_to tag.name, {action: :filter, tag_name: tag.name}, class: "filter-by-tag" %>
   <% end %>
 </div>
 

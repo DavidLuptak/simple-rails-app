@@ -8,6 +8,12 @@ class PostsController < ApplicationController
     @tags = Tag.order('posts_count DESC')
   end
 
+  def filter
+    @posts = Tag.friendly.find(params[:tag_name]).posts
+    @tags = Tag.order('posts_count DESC')
+    render :index
+  end
+
   # GET /posts/new
   def new
     @post = Post.new
