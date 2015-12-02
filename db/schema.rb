@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151129231802) do
+ActiveRecord::Schema.define(version: 20151202112353) do
 
   create_table "posts", force: :cascade do |t|
     t.string   "author"
@@ -28,8 +28,9 @@ ActiveRecord::Schema.define(version: 20151129231802) do
 
   create_table "tags", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "posts_count"
   end
 
 end

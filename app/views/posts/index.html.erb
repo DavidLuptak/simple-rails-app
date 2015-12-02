@@ -6,6 +6,7 @@
   <h2>Filter by tag</h2>
   <% @tags.each do |tag| %>
     <a class="filter-by-tag" href="posts/filter/<%= tag.name %>"><%= tag.name %></a>
+      <a class="tag-counter"><%= tag.posts_count %></a>
   <% end %>
 </div>
 

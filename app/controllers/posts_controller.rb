@@ -5,9 +5,7 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     @posts = Post.all.order('updated_at DESC')
-
-    # http://stackoverflow.com/questions/20943419/rails-how-to-sort-by-occurrences-in-habtm-table
-    @tags = Tag.includes(:posts).group('posts_tags.tag_id').references(:posts).order("count(posts_tags.tag_id) DESC")
+    @tags = Tag.order('posts_count DESC')
   end
 
   # GET /posts/new
