@@ -15,11 +15,15 @@ class Post < ActiveRecord::Base
 
   def find_or_create_tags
     decrement_posts_count # due to update
+    old_tags = Array.new(tags) # due to sorting
     self.tags = []
     parse_tags_string.each do |tag|
       tags << Tag.find_or_create_by!(name: tag)
     end
     increment_posts_count
+
+    # sorting posts also when only tag changes
+    self.updated_at = Time.now if old_tags.sort != tags.sort
   end
 
   def parse_tags_string
