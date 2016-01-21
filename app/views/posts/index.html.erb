@@ -1,17 +1,27 @@
 <p id="notice"><%= notice %></p>
 
-<h1>
-  <%= link_to 'Posts', root_path %>
-</h1>
-
-<div class="row">
-  <h2>Filter by tag</h2>
-  <% @tags.each do |tag| %>
-    <%= link_to tag.name, {action: :filter, tag_name: tag.name}, class: "filter-by-tag" %>
-  <% end %>
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h1 class="text-center panel-title" title="List all posts">
+      <%= link_to 'Posts', root_path %>
+    </h1>
+  </div>
+  <div class="panel-body">
+        <ul class="nav nav-pills" role="tablist">
+          <% @tags.each do |tag| %>
+            <li role="presentation"<% if current_page?("/posts/filter/#{tag.name}") %> class='active'<% end %>>
+              <a class="filter-by-tag" href="/posts/filter/<%= tag.name %>" title="Filter by tag"><%= tag.name %>
+                <span class="badge"><%= tag.posts_count %></span>
+              </a>
+            </li>
+          <% end %>
+        </ul>
+  </div>
 </div>
 
-<table>
+
+
+<table class="table table-striped">
   <thead>
     <tr>
       <th>Author</th>
@@ -45,8 +55,18 @@
             <%= post.tags.map {|tag| tag.name}.join(', ') %>
           </div>
         </td>
-        <td><%= link_to 'Edit', edit_post_path(post) %></td>
-        <td><%= link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+          <a class="btn btn-warning" href="<%= edit_post_path(post) %>">Edit</a>
+        </td>
+        <td>
+          <a class="btn btn-danger"
+             data-confirm="Are you sure?"
+             rel="nofollow"
+             data-method="delete"
+             href="<%= post_path(post) %>">
+            Delete
+          </a>
+        </td>
       </tr>
     <% end %>
   </tbody>
@@ -54,4 +74,4 @@
 
 <br>
 
-<%= link_to 'New Post', new_post_path %>
+<a class="btn btn-success" href="<%= new_post_path %>">New Post</a>
